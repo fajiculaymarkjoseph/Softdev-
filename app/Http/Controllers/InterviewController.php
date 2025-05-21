@@ -46,7 +46,18 @@ class InterviewController extends Controller
         
         
     }
-    
+
+    public function show($id)
+{
+    $schedule = InterviewSchedule::with(['applicant', 'interviewer'])->find($id);
+
+    if (!$schedule) {
+        return response()->json(['message' => 'Schedule not found'], 404);
+    }
+
+    return new InterviewScheduleResource($schedule);
+}
+
     public function assign(Request $request)
     {
         $request->validate([

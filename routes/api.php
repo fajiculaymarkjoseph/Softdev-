@@ -32,6 +32,7 @@ Route::prefix('interviewers')->group(function () {
 Route::prefix('schedules')->group(function () {
     Route::get('interview-schedules', [InterviewController::class, 'index']);
     Route::post('interview-schedules', [InterviewController::class, 'store']);
+    Route::get('interview-schedules/{id}', [InterviewController::class, 'show']);
     Route::put('/interview-schedules/{id}', [InterviewController::class, 'update']);
     Route::delete('/interview-schedules/{id}', [InterviewController::class, 'destroy']);
     Route::post('/interview-schedules/assign', [InterviewController::class, 'assign']);
