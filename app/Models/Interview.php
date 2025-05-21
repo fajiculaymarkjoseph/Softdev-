@@ -9,15 +9,6 @@ class Interview extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'applicant_no',
-        'applicant_name',
-        'program',
-        'progress',
-        'time_slot',
-        'interviewer'
-    ];
-
 
 
     // Relationship: Interview belongs to an applicant

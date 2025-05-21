@@ -31,6 +31,20 @@ protected $casts = [
         return $this->belongsTo(Applicant::class, 'applicant_id');
     }
 
+//     public function schedules() {
+//     return $this->hasMany(InterviewSchedule::class);
+// }
+
+// public function interviews() {
+//     return $this->hasMany(Interview::class);
+// }
+  public function room()
+{
+    return $this->belongsTo(Room::class, 'room_number', 'room_number');
+}
+
+
+
     public function interviewer()
     {
         return $this->belongsTo(Interviewer::class, 'interviewer_id');

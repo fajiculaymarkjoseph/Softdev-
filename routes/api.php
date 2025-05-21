@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Http\Request;
 use App\Http\Controllers\ScoreController;
-use App\Http\Controllers\InterviewStatusController;
+use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\InterviewerController;
@@ -41,6 +41,8 @@ Route::get('/scores', [ScoreController::class, 'index']);
 Route::post('/scores', [ScoreController::class, 'store']);
 Route::get('/scores/{id}', [ScoreController::class, 'show']);
 Route::delete('/scores/{id}', [ScoreController::class, 'destroy']);
+Route::put('/scores/{id}', [ScoreController::class, 'update']);
 
-Route::get('/statuses', [InterviewStatusController::class, 'index']);
-Route::get('/statuses/{applicant_id}', [InterviewStatusController::class, 'show']);
+
+Route::get('/statuses', [EvaluationController::class, 'index']);
+Route::get('/statuses/{applicant_id}', [EvaluationController::class, 'show']);

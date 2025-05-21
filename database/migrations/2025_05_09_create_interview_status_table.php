@@ -10,7 +10,7 @@ public function up()
 {
     Schema::create('applicant_interview_statuses', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('applicant_id')->constrained('users')->onDelete('cascade');
+       $table->foreignId('applicant_id')->constrained('applicants')->onDelete('cascade');
         $table->enum('status', ['Pending', 'In Progress', 'Evaluation Completed', 'Passed', 'Failed']);
         $table->timestamps();
     });

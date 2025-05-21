@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\InterviewSchedule;
+use App\Models\Applicant;
+use App\Models\Interviewer;
 use Carbon\Carbon;
 
 class Score extends Model
@@ -11,19 +14,15 @@ class Score extends Model
     use HasFactory;
 
     protected $fillable = ['interview_schedule_id', 'score', 'comments'];
+    protected $hidden = ['created_at', 'updated_at'];
+    protected $appends = ['created_at_human', 'updated_at_human'];
 
-    protected $hidden = ['created_at', 'updated_at']; 
-    protected $appends = ['created_at_readable', 'updated_at_readable']; 
 
-    public function interviewSchedule()
-    {
-        return $this->belongsTo(InterviewSchedule::class);
-    }
-
+    // Relationships
     public function applicant()
     {
         return $this->hasOneThrough(
-            \App\Models\Applicant::class,
+            Applicant::class,
             InterviewSchedule::class,
             'id',
             'id',
@@ -35,7 +34,7 @@ class Score extends Model
     public function interviewer()
     {
         return $this->hasOneThrough(
-            \App\Models\Interviewer::class,
+            Interviewer::class,
             InterviewSchedule::class,
             'id',
             'id',
@@ -44,13 +43,22 @@ class Score extends Model
         );
     }
 
-    public function getCreatedAtReadableAttribute()
+    public function interviewSchedule()
     {
-        return Carbon::parse($this->created_at)->toDayDateTimeString();
+        return $this->belongsTo(InterviewSchedule::class);
     }
 
-    public function getUpdatedAtReadableAttribute()
-    {
-        return Carbon::parse($this->updated_at)->toDayDateTimeString();
-    }
+    
+
+    // Accessors
+    public function getCreatedAtHumanAttribute()
+{
+    return Carbon::parse($this->created_at)->toDayDateTimeString();
+}
+
+public function getUpdatedAtHumanAttribute()
+{
+    return Carbon::parse($this->updated_at)->toDayDateTimeString();
+}
+
 }

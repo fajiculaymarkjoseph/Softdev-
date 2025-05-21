@@ -7,7 +7,7 @@ use App\Models\ApplicantInterviewStatus;
 use App\Models\InterviewSchedule;
 use App\Models\Score;
 
-class InterviewStatusController extends Controller
+class EvaluationController extends Controller
 {
     // List all statuses
     public function index()

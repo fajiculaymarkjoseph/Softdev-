@@ -37,6 +37,26 @@ class ScoreController extends Controller
         'data' => $score
     ]);
 }
+public function update(Request $request, $id)
+{
+    $score = Score::find($id);
+
+    if (!$score) {
+        return response()->json(['message' => 'Score not found'], 404);
+    }
+
+    $request->validate([
+        'score' => 'required|numeric|min:0|max:100',
+        'comments' => 'nullable|string'
+    ]);
+
+    $score->update($request->only(['score', 'comments']));
+
+    return response()->json([
+        'message' => 'Score updated',
+        'data' => $score
+    ]);
+}
 
     // View a single score by ID
     public function show($id)
